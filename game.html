@@ -16,7 +16,7 @@
     <div class="floating-emojis">💘✨🌸💓💖🌷</div>
 
     <h2 class="game-title" id="typewriter-text"></h2>
-    <div id="score-display">Caught: <span id="score">0</span>/3</div>
+    <div id="score-display">Caught: <span id="score">0</span>/5</div>
     <div id="hearts"></div>
 
     <div id="result-message" class="hidden">
@@ -81,7 +81,7 @@
         scoreDisplay.innerText = caught;
         heart.remove();
         clearInterval(fall);
-        if (caught >= 3) {
+        if (caught >= 5) {
           showResult();
         }
       });
