@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Final Surprise 💐</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="final-container">
+    <h2 class="final-title">Just one last thing... 🥺</h2>
+    <p class="final-msg">If you forgive me, something beautiful will bloom 💖</p>
+
+    <button id="bloomBtn" class="next-button">I Forgive You 🥹❤️</button>
+
+    <div id="bloomArea" class="hidden">
+      <div class="flower-bloom">
+        <div class="petal p1"></div>
+        <div class="petal p2"></div>
+        <div class="petal p3"></div>
+        <div class="petal p4"></div>
+        <div class="petal center"></div>
+      </div>
+      <p class="bloom-text">This flower is for you 💐</p>
+    </div>
+
+    <div id="hugArea" class="hidden">
+      <button id="hugBtn" class="next-button">Tap for a Hug 🤗</button>
+      <div id="hugAnimation" class="hidden">
+        <img src="https://cdn-icons-png.flaticon.com/512/6009/6009645.png" alt="Hug" class="hug-img" />
+        <p class="final-love-msg">This is my virtual hug. I love you always 💞</p>
+      </div>
+    </div>
+
+    <div class="falling-hearts-container" id="heartsRain"></div>
+  </div>
+
+  <script>
+    const bloomBtn = document.getElementById('bloomBtn');
+    const bloomArea = document.getElementById('bloomArea');
+    const hugArea = document.getElementById('hugArea');
+    const hugBtn = document.getElementById('hugBtn');
+    const hugAnimation = document.getElementById('hugAnimation');
+
+    bloomBtn.addEventListener('click', () => {
+      bloomBtn.classList.add('hidden');
+      bloomArea.classList.remove('hidden');
+      hugArea.classList.remove('hidden');
+      startHeartRain();
+    });
+
+    hugBtn.addEventListener('click', () => {
+      hugAnimation.classList.remove('hidden');
+    });
+
+    // Falling hearts loop
+    function startHeartRain() {
+      const container = document.getElementById('heartsRain');
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('falling-heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        container.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }, 300);
+    }
+  </script>
+</body>
+</html>

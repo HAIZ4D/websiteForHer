@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catch My Heart 💘</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game-area">
+    <h2 class="game-title">Tap the falling hearts to catch them! 💖</h2>
+    <div id="score-display">Caught: <span id="score">0</span>/3</div>
+
+    <div id="hearts"></div>
+
+    <div id="result-message" class="hidden">
+      <p id="result-text"></p>
+      <button id="result-btn" class="next-button"></button>
+    </div>
+  </div>
+
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_fdd4b4d3b5.mp3?filename=romantic-love-story-background-music-110066.mp3" type="audio/mp3" />
+  </audio>
+
+  <script>
+    const heartsContainer = document.getElementById('hearts');
+    const resultBox = document.getElementById('result-message');
+    const resultText = document.getElementById('result-text');
+    const resultBtn = document.getElementById('result-btn');
+    const scoreDisplay = document.getElementById('score');
+
+    let caught = 0;
+    let dropped = 0;
+    const maxHearts = 5;
+
+    function dropHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 90 + '%';
+      heartsContainer.appendChild(heart);
+
+      let top = 0;
+      const fall = setInterval(() => {
+        top += 2;
+        heart.style.top = `${top}px`;
+
+        if (top > window.innerHeight) {
+          heart.remove();
+          clearInterval(fall);
+          dropped++;
+          checkEnd();
+        }
+      }, 20);
+
+      heart.addEventListener('click', () => {
+        caught++;
+        scoreDisplay.innerText = caught;
+        heart.remove();
+        clearInterval(fall);
+        checkEnd();
+      });
+    }
+
+    function checkEnd() {
+      if (dropped + caught >= maxHearts) {
+        setTimeout(() => {
+          resultBox.classList.remove('hidden');
+          if (caught >= 3) {
+            resultText.innerText = "You caught my heart... all of them 💘";
+            resultBtn.innerText = "Next 💐";
+            resultBtn.onclick = () => window.location.href = 'final.html';
+          } else {
+            resultText.innerText = "Oops! You missed a few hearts 😢";
+            resultBtn.innerText = "Try Again ❤️";
+            resultBtn.onclick = () => location.reload();
+          }
+        }, 300);
+      }
+    }
+
+    // Drop hearts with interval
+    let drops = 0;
+    const dropInterval = setInterval(() => {
+      if (drops < maxHearts) {
+        dropHeart();
+        drops++;
+      } else {
+        clearInterval(dropInterval);
+      }
+    }, 1200);
+  </script>
+</body>
+</html>
