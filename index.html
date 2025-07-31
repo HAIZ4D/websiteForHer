@@ -17,23 +17,20 @@
     <button class="next-button" onclick="window.location.href='game.html'">Next 💘</button>
   </div>
 
-  <audio autoplay loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_fdd4b4d3b5.mp3?filename=romantic-love-story-background-music-110066.mp3" type="audio/mp3" />
-  </audio>
 
-  <script>
-    // Fireflies / sparkle hearts
-    const container = document.querySelector('.floating-hearts');
-    function spawnHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'particle-heart';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = 2 + Math.random() * 3 + 's';
-      heart.innerText = '💕';
-      container.appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
-    }
-    setInterval(spawnHeart, 400);
-  </script>
+
+<script>
+  const container = document.querySelector('.floating-hearts');
+  function spawnHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'particle-heart';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = 2 + Math.random() * 3 + 's';
+    heart.innerText = '💕';
+    container.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }
+  setInterval(spawnHeart, 400);
+</script>
 </body>
 </html>

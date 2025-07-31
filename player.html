@@ -1,0 +1,11 @@
+<!-- player.html -->
+<audio id="bg-music" autoplay loop>
+  <source src="wave to earth - love. (lyrics).mp3" type="audio/mp3" />
+</audio>
+
+<script>
+  const audio = document.getElementById('bg-music');
+  document.addEventListener('click', () => {
+    audio.play().catch(() => {});
+  }, { once: true });
+</script>
