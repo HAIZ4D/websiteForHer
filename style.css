@@ -4,15 +4,14 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background: radial-gradient(circle at top, #ffe6f0, #ffc0cb);
   color: #4a0033;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
   text-align: center;
   position: relative;
+  display: block; /* optional: revert from flex */
 }
+
 
 .opening-container {
   animation: fadeIn 2s ease-in-out;
@@ -133,48 +132,15 @@ body {
 
 
 /* GAME PAGE */
-/* Background Clouds */
-#clouds {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.cloud {
-  position: absolute;
-  top: 10%;
-  width: 200px;
-  height: 80px;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.5;
-  filter: blur(4px);
-  animation: cloudMove 60s linear infinite;
-}
-
-.c1 { left: -250px; top: 20%; animation-delay: 0s; }
-.c2 { left: -200px; top: 50%; animation-delay: 10s; }
-
-@keyframes cloudMove {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(150vw); }
-}
-
-/* Game UI */
 #game-area {
-  position: relative;
-  z-index: 1;
   width: 100%;
   height: 100vh;
   background: linear-gradient(to bottom, #fff0f5, #ffcce6);
+  position: relative;
+  overflow: hidden;
   text-align: center;
   padding-top: 4rem;
-  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .floating-emojis {
@@ -245,26 +211,6 @@ body {
   top: 0;
 }
 
-/* Fairy Wings */
-.wings {
-  position: absolute;
-  top: -15px;
-  left: -25px;
-  width: 80px;
-  height: 40px;
-  background: radial-gradient(circle at center, #fff0fa 40%, transparent 70%);
-  border-radius: 50%;
-  opacity: 0.4;
-  transform: rotate(-30deg);
-  animation: flutter 2s infinite ease-in-out;
-  z-index: -1;
-}
-
-@keyframes flutter {
-  0%, 100% { transform: rotate(-30deg) scale(1); }
-  50% { transform: rotate(-20deg) scale(1.1); }
-}
-
 @keyframes beat {
   0%, 100% { transform: scale(1) rotate(45deg); }
   50% { transform: scale(1.2) rotate(45deg); }
@@ -311,45 +257,22 @@ body {
   50% { transform: translate(-50%, 10px); }
 }
 
-/* Sparkle text blink */
-.sparkle-text {
-  animation: blinkSparkle 1.2s infinite alternate;
-  background: linear-gradient(90deg, #ff66cc, #ff99cc, #ff66cc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 1.5rem;
-}
-
-@keyframes blinkSparkle {
-  0% { text-shadow: 0 0 10px #ff66cc; opacity: 1; }
-  100% { text-shadow: 0 0 25px #ff99cc, 0 0 40px #fff; opacity: 0.9; }
-}
-
-/* Result animation */
-#result-message {
-  position: absolute;
-  top: 35%;
-  width: 100%;
-  animation: fadeIn 1.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-
 
 
 /* FINAL PAGE */
 .final-container {
+  text-align: center;
   padding: 2rem 1rem;
   max-width: 600px;
   margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: fadeIn 1s ease-in-out;
+}
+
+img, .flower-bloom {
+  max-width: 100%;
+  height: auto;
 }
 
 .final-title {
@@ -450,8 +373,9 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }
+
 
 .falling-heart {
   position: absolute;
