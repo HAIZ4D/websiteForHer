@@ -7,15 +7,21 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="game-area">
-    <h2 class="game-title">Tap the falling hearts to catch them! 💖</h2>
-    <div id="score-display">Caught: <span id="score">0</span>/3</div>
+  <div id="clouds">
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+  </div>
 
+  <div id="game-area">
+    <div class="floating-emojis">💘✨🌸💓💖🌷</div>
+
+    <h2 class="game-title" id="typewriter-text"></h2>
+    <div id="score-display">Caught: <span id="score">0</span>/3</div>
     <div id="hearts"></div>
 
     <div id="result-message" class="hidden">
       <p id="result-text"></p>
-      <button id="result-btn" class="next-button"></button>
+      <button id="result-btn" class="next-button">Next 💐</button>
     </div>
   </div>
 
@@ -24,19 +30,36 @@
   </audio>
 
   <script>
+    // Typewriter effect
+    const text = "Can you catch my heart? 💞";
+    const typeTarget = document.getElementById('typewriter-text');
+    let idx = 0;
+    function typeWriter() {
+      if (idx < text.length) {
+        typeTarget.innerHTML += text.charAt(idx);
+        idx++;
+        setTimeout(typeWriter, 80);
+      }
+    }
+    window.onload = typeWriter;
+
+    // Game Logic
     const heartsContainer = document.getElementById('hearts');
     const resultBox = document.getElementById('result-message');
     const resultText = document.getElementById('result-text');
-    const resultBtn = document.getElementById('result-btn');
     const scoreDisplay = document.getElementById('score');
+    const resultBtn = document.getElementById('result-btn');
 
     let caught = 0;
-    let dropped = 0;
-    const maxHearts = 5;
 
     function dropHeart() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
+
+      const wings = document.createElement('div');
+      wings.className = 'wings';
+      heart.appendChild(wings);
+
       heart.style.left = Math.random() * 90 + '%';
       heartsContainer.appendChild(heart);
 
@@ -44,12 +67,9 @@
       const fall = setInterval(() => {
         top += 2;
         heart.style.top = `${top}px`;
-
         if (top > window.innerHeight) {
           heart.remove();
           clearInterval(fall);
-          dropped++;
-          checkEnd();
         }
       }, 20);
 
@@ -58,37 +78,25 @@
         scoreDisplay.innerText = caught;
         heart.remove();
         clearInterval(fall);
-        checkEnd();
+        if (caught >= 3) {
+          showResult();
+        }
       });
     }
 
-    function checkEnd() {
-      if (dropped + caught >= maxHearts) {
-        setTimeout(() => {
-          resultBox.classList.remove('hidden');
-          if (caught >= 3) {
-            resultText.innerText = "You caught my heart... all of them 💘";
-            resultBtn.innerText = "Next 💐";
-            resultBtn.onclick = () => window.location.href = 'final.html';
-          } else {
-            resultText.innerText = "Oops! You missed a few hearts 😢";
-            resultBtn.innerText = "Try Again ❤️";
-            resultBtn.onclick = () => location.reload();
-          }
-        }, 300);
-      }
+    function showResult() {
+      resultText.innerText = "You caught my heart... all of them 💘";
+      resultBox.classList.remove('hidden');
+      resultBtn.onclick = () => window.location.href = 'final.html';
     }
 
-    // Drop hearts with interval
-    let drops = 0;
     const dropInterval = setInterval(() => {
-      if (drops < maxHearts) {
+      if (caught < 3) {
         dropHeart();
-        drops++;
       } else {
         clearInterval(dropInterval);
       }
-    }, 1200);
+    }, 1000);
   </script>
 </body>
 </html>
