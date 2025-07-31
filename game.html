@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catch My Heart 💘</title>
+ <title>Cik Singa Latte❤️</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -20,7 +20,7 @@
     <div id="hearts"></div>
 
     <div id="result-message" class="hidden">
-      <p id="result-text"></p>
+      <p id="result-text" class="sparkle-text"></p>
       <button id="result-btn" class="next-button">Next 💐</button>
     </div>
   </div>
@@ -29,9 +29,12 @@
     <source src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_fdd4b4d3b5.mp3?filename=romantic-love-story-background-music-110066.mp3" type="audio/mp3" />
   </audio>
 
+  <!-- 🎊 Confetti JS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <script>
-    // Typewriter effect
-    const text = "Can you catch my heart? 💞";
+    // Typewriter
+    const text = "Can you catch my heart? 💞 Kalau proo ahh HAHAHHA";
     const typeTarget = document.getElementById('typewriter-text');
     let idx = 0;
     function typeWriter() {
@@ -43,7 +46,7 @@
     }
     window.onload = typeWriter;
 
-    // Game Logic
+    // Game
     const heartsContainer = document.getElementById('hearts');
     const resultBox = document.getElementById('result-message');
     const resultText = document.getElementById('result-text');
@@ -85,7 +88,14 @@
     }
 
     function showResult() {
-      resultText.innerText = "You caught my heart... all of them 💘";
+      // Confetti!
+      confetti({
+        particleCount: 200,
+        spread: 180,
+        origin: { y: 0.5 },
+      });
+
+      resultText.innerText = "You caught all my hearts... HEBATTTNYEE AYANGGGG!!!!";
       resultBox.classList.remove('hidden');
       resultBtn.onclick = () => window.location.href = 'final.html';
     }

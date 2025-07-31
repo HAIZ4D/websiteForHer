@@ -310,6 +310,33 @@ body {
   50% { transform: translate(-50%, 10px); }
 }
 
+/* Sparkle text blink */
+.sparkle-text {
+  animation: blinkSparkle 1.2s infinite alternate;
+  background: linear-gradient(90deg, #ff66cc, #ff99cc, #ff66cc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.5rem;
+}
+
+@keyframes blinkSparkle {
+  0% { text-shadow: 0 0 10px #ff66cc; opacity: 1; }
+  100% { text-shadow: 0 0 25px #ff99cc, 0 0 40px #fff; opacity: 0.9; }
+}
+
+/* Result animation */
+#result-message {
+  position: absolute;
+  top: 35%;
+  width: 100%;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 
 
 
